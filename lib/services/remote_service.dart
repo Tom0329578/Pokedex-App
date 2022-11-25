@@ -1,4 +1,4 @@
-import 'package:flutter_opdracht_7/models/post.dart';
+import 'package:flutter_opdracht_7/models/Pokedex.dart';
 import 'package:flutter_opdracht_7/views/home_page.dart';
 import 'package:http/http.dart' as http;
 

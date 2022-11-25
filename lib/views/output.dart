@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_opdracht_7/models/post.dart';
+import 'package:flutter_opdracht_7/models/Pokedex.dart';
 import 'package:flutter_opdracht_7/services/remote_service.dart';
 import 'package:flutter_opdracht_7/views/detail_page.dart';
 import 'package:flutter_opdracht_7/views/home_page.dart';
@@ -38,7 +38,7 @@ class _OutputState extends State<Output> {
     } else {
       setState(() {
         error404 = true;
-        errormessage = "Error 404\r\nUw pokemon is niet gevonden";
+        errormessage = "Error 404\r\nYour Pokemon could not be found";
       });
       Navigator.pop(context);
     }

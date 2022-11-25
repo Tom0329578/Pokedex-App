@@ -11,11 +11,6 @@ List<Pokedex> pokedexFromJson(String str) =>
 String pokedexToJson(List<Pokedex> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-Pokedex404 pokedex404FromJson(String str) =>
-    Pokedex404.fromJson(json.decode(str));
-
-String pokedex404ToJson(Pokedex404 data) => json.encode(data.toJson());
-
 class Pokedex {
   Pokedex({
     required this.number,
@@ -141,25 +136,5 @@ class Family {
         "id": id,
         "evolutionStage": evolutionStage,
         "evolutionLine": List<dynamic>.from(evolutionLine.map((x) => x)),
-      };
-}
-
-class Pokedex404 {
-  Pokedex404({
-    required this.error,
-    required this.message,
-  });
-
-  int error;
-  String message;
-
-  factory Pokedex404.fromJson(Map<String, dynamic> json) => Pokedex404(
-        error: json["error"],
-        message: json["message"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "error": error,
-        "message": message,
       };
 }

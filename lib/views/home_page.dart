@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
                           margin: const EdgeInsets.only(top: 20, bottom: 40),
                           padding: const EdgeInsets.only(left: 10, right: 10),
                           child: Text(
-                            'Vul de naam of het nummer in van een pokemon uit generatie 1 tot en met generatie 7\r\n\r\nKlik daarna op zoeken',
+                            'Enter the name or number of a Pokemon from generation 1 to 7\r\n\r\nThen tap the search button',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: fontSize),
                           ),
@@ -82,12 +82,12 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
                                     controller: myController,
                                     decoration: const InputDecoration(
                                         labelText:
-                                            "Vul een Pokemon naam of nummer in"),
+                                            "Enter a Pokemon name or number"),
                                     validator: (input) {
                                       if (isInputValid(input!)) {
                                         return null;
                                       } else {
-                                        return 'Gebruik alleen letters en nummers';
+                                        return 'Only use valid characters';
                                       }
                                     },
                                   ),
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
                                       constraints: BoxConstraints.tightFor(
                                           width: textfieldWidth, height: 50.0),
                                       child: Text(
-                                        "Zoeken",
+                                        "Search",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: fontSize,
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
                     errormessage,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 40,
+                        fontSize: 25,
                         color: Colors.red.shade900),
                     textAlign: TextAlign.center,
                   ),

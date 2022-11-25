@@ -51,6 +51,8 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+  # optionally, as transparency is not allowed on app store
+  # remove_alpha_ios: true
 
 # The following section is specific to Flutter packages.
 flutter:
