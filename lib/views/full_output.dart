@@ -5,46 +5,37 @@ import 'package:flutter_opdracht_7/services/remote_service.dart';
 import 'package:flutter_opdracht_7/views/detail_page.dart';
 import 'package:flutter_opdracht_7/views/home_page.dart';
 import 'package:flutter_opdracht_7/models/EvolutionChain.dart';
+import 'package:flutter_opdracht_7/models/pokemonTypes.dart';
+import 'package:flutter_opdracht_7/models/TypeList.dart';
 
-class Output extends StatefulWidget {
-  const Output({Key? key}) : super(key: key);
+class TypeOutput extends StatefulWidget {
+  const TypeOutput({Key? key}) : super(key: key);
 
   @override
-  State<Output> createState() => _OutputState();
+  State<TypeOutput> createState() => _TypeOutputState();
 }
 
-Pokedex? globalPokedex;
-Pokemon? globalCurrentPokemon;
-EvolutionChainFull? globalChain;
-
-class _OutputState extends State<Output> {
-  Pokedex? pokedex;
-  Pokedex? tempPokedex;
-  String? placeHolder;
-  Pokemon? tempPokemon;
-  Pokemon? pokemon;
-  List<Variety>? tempVarieties;
-  EvolutionChainFull? tempChain;
-  EvolutionChainFull? chain;
-  List<String?>? images;
-
-  String pokemonName = textoutput;
+class _TypeOutputState extends State<TypeOutput> {
+  PokemonTypes? pokemonTypes;
+  TypeList? typeList;
+  List<String>? types;
+  List<POKEMON> list = [];
   int number = 0;
   var isLoaded = false;
+  var dropDownValue;
 
   @override
   void initState() {
     super.initState();
-    getData(pokemonName);
+    getData(type);
   }
 
-  getData(String poke) async {
-    tempPokedex = await RemoteServices().getPokedex(poke);
-    if (tempPokedex != null) {
+  getData(String? type) async {
+    pokemonTypes = await RemoteServices().getPokemonTypes(type!);
+    if (pokemonTypes != null) {
       setState(() {
-        pokedex = tempPokedex;
         errormessage = ' ';
-        number = pokedex!.id;
+        list = pokemonTypes!.pokemon;
         isLoaded = true;
       });
     } else {
@@ -67,7 +58,7 @@ class _OutputState extends State<Output> {
           },
         ),
         centerTitle: true,
-        title: Text('Pokedex Entry: $number', textAlign: TextAlign.center),
+        title: Text('Pokedex Entries: $type', textAlign: TextAlign.center),
         backgroundColor: Colors.red.shade700,
         shape:
             Border(bottom: BorderSide(color: Colors.grey.shade800, width: 6)),
@@ -80,7 +71,7 @@ class _OutputState extends State<Output> {
         ),
         child: ListView.builder(
             padding: EdgeInsets.all(10),
-            itemCount: 1,
+            itemCount: list.length,
             itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
@@ -90,15 +81,17 @@ class _OutputState extends State<Output> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     title: Text(
-                      pokedex!.name,
+                      pokemonTypes!.pokemon[index].pokemon.name,
                       style: TextStyle(
                         color: Colors.grey.shade700,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
-                    subtitle: Text('ID: ${pokedex!.id}'),
+                    subtitle: Text(
+                        'ID: ${pokemonTypes?.pokemon[index].pokemon.url.split('/')[6]}'),
                     onTap: () {
                       setState(() {
+                        textoutput = pokemonTypes!.pokemon[index].pokemon.name;
                         ListIndex = index;
                       });
                       Navigator.of(context).push(_routeDetails());
