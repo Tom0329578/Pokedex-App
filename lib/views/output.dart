@@ -13,10 +13,6 @@ class Output extends StatefulWidget {
   State<Output> createState() => _OutputState();
 }
 
-Pokedex? globalPokedex;
-Pokemon? globalCurrentPokemon;
-EvolutionChainFull? globalChain;
-
 class _OutputState extends State<Output> {
   Pokedex? pokedex;
   Pokedex? tempPokedex;
@@ -30,7 +26,7 @@ class _OutputState extends State<Output> {
 
   String pokemonName = textoutput;
   int number = 0;
-  var isLoaded = false;
+  bool isLoaded = false;
 
   @override
   void initState() {
@@ -98,9 +94,7 @@ class _OutputState extends State<Output> {
                     ),
                     subtitle: Text('ID: ${pokedex!.id}'),
                     onTap: () {
-                      setState(() {
-                        ListIndex = index;
-                      });
+                      setState(() {});
                       Navigator.of(context).push(_routeDetails());
                     },
                   ),

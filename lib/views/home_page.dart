@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
     if (deviceWidth >= 800) {
       textfieldWidth = 450;
     } else {
-      textfieldWidth = deviceWidth - 20;
+      textfieldWidth = deviceWidth - 40;
     }
 
     return Scaffold(
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
                             margin: const EdgeInsets.only(top: 20, bottom: 40),
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Text(
-                              'Enter the name or number of a Pokemon from generation 1 to 8\r\n\r\nThen tap the search button\r\n\r\nOr Select a type and search all pokemon with that type',
+                              'Enter the name or number of a Pokemon from generation 1 to 8\r\n\r\nThen tap the search button\r\n\r\nOr select a type and search all pokemon with that type',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: fontSize),
                             ),
@@ -126,9 +126,14 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
                                   children: [
                                     TextFormField(
                                       controller: myController,
-                                      decoration: const InputDecoration(
-                                          labelText:
-                                              "Enter a Pokemon name or number"),
+                                      decoration: InputDecoration(
+                                        labelText:
+                                            "Enter a Pokemon name or number",
+                                        labelStyle: TextStyle(
+                                            color: Colors.grey.shade700,
+                                            fontWeight: FontWeight.w900,
+                                            fontSize: 14),
+                                      ),
                                       validator: (input) {
                                         if (isInputValid(input!)) {
                                           return null;
@@ -167,34 +172,40 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
                                         )),
                                     const Padding(
                                         padding: EdgeInsets.only(bottom: 20)),
-                                    DropdownButton<String>(
-                                      borderRadius: BorderRadius.circular(15),
-                                      value: dropDownValue,
-                                      icon: const Icon(Icons.arrow_downward),
-                                      elevation: 16,
-                                      style: TextStyle(
-                                        color: Colors.grey.shade700,
-                                        fontWeight: FontWeight.w900,
+                                    Container(
+                                      width: textfieldWidth,
+                                      child: DropdownButton<String>(
+                                        isExpanded: true,
+                                        borderRadius: BorderRadius.circular(15),
+                                        value: dropDownValue,
+                                        icon: const Icon(Icons.arrow_downward),
+                                        elevation: 16,
+                                        style: TextStyle(
+                                          color: Colors.grey.shade700,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                        underline: Container(
+                                          height: 1,
+                                          color: Colors.grey.shade500,
+                                        ),
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            dropDownValue = value!;
+                                            type = dropDownValue;
+                                          });
+                                        },
+                                        items: typeList?.results
+                                            .map<DropdownMenuItem<String>>(
+                                                (Result value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value.name,
+                                            child: Text(value.name),
+                                          );
+                                        }).toList(),
                                       ),
-                                      underline: Container(
-                                        height: 2,
-                                        color: Colors.red.shade700,
-                                      ),
-                                      onChanged: (String? value) {
-                                        setState(() {
-                                          dropDownValue = value!;
-                                          type = dropDownValue;
-                                        });
-                                      },
-                                      items: typeList?.results
-                                          .map<DropdownMenuItem<String>>(
-                                              (Result value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value.name,
-                                          child: Text(value.name),
-                                        );
-                                      }).toList(),
                                     ),
+                                    const Padding(
+                                        padding: EdgeInsets.only(bottom: 20)),
                                     RawMaterialButton(
                                         fillColor: Colors.red.shade700,
                                         onPressed: () {
@@ -209,7 +220,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
                                             width: textfieldWidth,
                                             height: 50.0),
                                         child: Text(
-                                          "Show All of Type: $type",
+                                          "Show All With Type: $type",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: fontSize,

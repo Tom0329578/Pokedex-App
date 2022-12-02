@@ -22,7 +22,6 @@ class _TypeOutputState extends State<TypeOutput> {
   List<POKEMON> list = [];
   int number = 0;
   var isLoaded = false;
-  var dropDownValue;
 
   @override
   void initState() {
@@ -92,12 +91,11 @@ class _TypeOutputState extends State<TypeOutput> {
                     onTap: () {
                       setState(() {
                         textoutput = pokemonTypes!.pokemon[index].pokemon.name;
-                        ListIndex = index;
                       });
                       Navigator.of(context).push(_routeDetails());
                     },
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 10)),
+                  const Padding(padding: EdgeInsets.only(bottom: 10)),
                 ],
               );
             }),
