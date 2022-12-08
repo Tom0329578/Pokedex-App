@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_opdracht_7/models/Pokedex.dart';
-import 'package:flutter_opdracht_7/models/Pokemon.dart';
 import 'package:flutter_opdracht_7/services/remote_service.dart';
 import 'package:flutter_opdracht_7/views/detail_page.dart';
 import 'package:flutter_opdracht_7/views/home_page.dart';
-import 'package:flutter_opdracht_7/models/EvolutionChain.dart';
 import 'package:flutter_opdracht_7/models/pokemonTypes.dart';
 import 'package:flutter_opdracht_7/models/TypeList.dart';
 
@@ -29,6 +26,7 @@ class _TypeOutputState extends State<TypeOutput> {
     getData(type);
   }
 
+  //this method gets a list of all pokemon with the chosen type
   getData(String? type) async {
     pokemonTypes = await RemoteServices().getPokemonTypes(type!);
     if (pokemonTypes != null) {
@@ -104,6 +102,7 @@ class _TypeOutputState extends State<TypeOutput> {
   }
 }
 
+//route to give the transition an animation when going to the detail page
 Route _routeDetails() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => const Details(),

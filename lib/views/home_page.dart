@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
     getTypes();
   }
 
+  //gets a list of all pokemon types for use in the dropdown
   getTypes() async {
     typeList = await RemoteServices().getTypeList();
     if (typeList != null) {
@@ -53,6 +54,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
 
   @override
   Widget build(BuildContext context) {
+    //here the text field width gets set based on the device width
     double deviceWidth = MediaQuery.of(context).size.width;
     double textfieldWidth;
     if (deviceWidth >= 800) {
@@ -241,6 +243,7 @@ class _HomePageState extends State<HomePage> with InputValidationMixin {
   }
 }
 
+//route to give the transition an animation when going to the output page
 Route _routeOutput() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => const Output(),
@@ -257,6 +260,7 @@ Route _routeOutput() {
   );
 }
 
+//route to give the transition an animation when going to the full output page
 Route _routeFullOutput() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => const TypeOutput(),
@@ -273,6 +277,7 @@ Route _routeFullOutput() {
   );
 }
 
+//a mixin that validates the from controls
 mixin InputValidationMixin {
   bool isInputValid(String input) {
     String pattern = r"^[A-Za-z0-9']+$";

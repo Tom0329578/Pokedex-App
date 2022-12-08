@@ -34,6 +34,7 @@ class _OutputState extends State<Output> {
     getData(pokemonName);
   }
 
+  //this method gets the pokedex data from a specific pokemon
   getData(String poke) async {
     tempPokedex = await RemoteServices().getPokedex(poke);
     if (tempPokedex != null) {
@@ -107,6 +108,7 @@ class _OutputState extends State<Output> {
   }
 }
 
+//route to give the transition an animation when going to the detail page
 Route _routeDetails() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => const Details(),

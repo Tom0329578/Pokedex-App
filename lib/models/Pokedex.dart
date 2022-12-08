@@ -11,7 +11,6 @@ class Pokedex {
     required this.color,
     required this.eggGroups,
     required this.evolutionChain,
-    required this.evolvesFromSpecies,
     required this.flavorTextEntries,
     required this.formDescriptions,
     required this.formsSwitchable,
@@ -39,7 +38,6 @@ class Pokedex {
   Color color;
   List<Color> eggGroups;
   dynamic evolutionChain;
-  dynamic evolvesFromSpecies;
   List<FlavorTextEntry> flavorTextEntries;
   List<dynamic> formDescriptions;
   bool formsSwitchable;
@@ -68,7 +66,6 @@ class Pokedex {
         eggGroups:
             List<Color>.from(json["egg_groups"].map((x) => Color.fromJson(x))),
         evolutionChain: EvolutionChain.fromJson(json["evolution_chain"]),
-        evolvesFromSpecies: json["evolves_from_species"],
         flavorTextEntries: List<FlavorTextEntry>.from(
             json["flavor_text_entries"]
                 .map((x) => FlavorTextEntry.fromJson(x))),
@@ -104,7 +101,6 @@ class Pokedex {
         "color": color.toJson(),
         "egg_groups": List<dynamic>.from(eggGroups.map((x) => x.toJson())),
         "evolution_chain": evolutionChain?.toJson(),
-        "evolves_from_species": evolvesFromSpecies,
         "flavor_text_entries":
             List<dynamic>.from(flavorTextEntries.map((x) => x.toJson())),
         "form_descriptions": List<dynamic>.from(formDescriptions.map((x) => x)),
@@ -156,7 +152,7 @@ class EvolutionChain {
     required this.url,
   });
 
-  String url;
+  String? url;
 
   factory EvolutionChain.fromJson(Map<String, dynamic> json) => EvolutionChain(
         url: json["url"],
