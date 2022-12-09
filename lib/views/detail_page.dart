@@ -175,7 +175,11 @@ class _DetailsState extends State<Details> {
                                 borderRadius: BorderRadius.circular(70),
                               ),
                             ),
-                            child: Image.network('$placeHolder'),
+                            child: FadeInImage(
+                                placeholder:
+                                    const AssetImage('Images/placeholder.png'),
+                                image: NetworkImage(
+                                    '${currentPokemon?.sprites.other?.officialArtwork.frontDefault}')),
                           )
                         ],
                       ),
